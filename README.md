@@ -10,6 +10,7 @@ npm start
 
 ### 组件的使用
 ```
+npm i --save react-image-swiper
 
 import Swiper from "react-image-swiper"
 .
