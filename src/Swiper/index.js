@@ -14,13 +14,25 @@ export default class Carousel extends Component{
         this.state = {
             left: -100,
             idx: -1,
-            option: {}
+            options: {
+                showPot: true,
+                timeGap: 3000,
+                autoplay: true
+            }
         }
     }
 
     componentDidMount() {
-        this.init();
-
+        var oContainer = document.getElementsByClassName("carousel-container")[0];
+        var oClassList = oContainer.classList;
+        if(this.props.className || this.props.class) {
+            oClassList.add(this.props.className || this.props.class)
+        }
+        this.setState({
+            options: Object.assign({}, this.state.options, this.props.options)
+        }, () => {
+            this.init();
+        });
 
         window.onresize = () =>{
             if (timerJ) {
@@ -28,7 +40,6 @@ export default class Carousel extends Component{
             }
             timerJ = setTimeout(() => {
                 //滚动条位置
-                console.log(111)
                 this.init();
                 timerJ = undefined;
             }, 300)
@@ -45,7 +56,7 @@ export default class Carousel extends Component{
                 </div>
 
                 {
-                    this.state.option.showPot
+                    this.state.options.showPot
                         ?
                         <ul className={"carousel-nav"} >
                             {this.state.arr && this.state.arr.map((item,index) => {
@@ -63,7 +74,7 @@ export default class Carousel extends Component{
     }
 
     init() {
-        let option = this.props.options;
+        let option = Object.assign({}, this.state.options, this.props.options);
         let outerParentWidth = this.myRef.current.clientWidth;
         let sliderLength = this.myRef.current.firstChild.childNodes.length;
         let arr = Array.prototype.slice.call(this.myRef.current.firstChild.childNodes);
@@ -72,7 +83,6 @@ export default class Carousel extends Component{
         let className = this.innerContainer.current.className;
         let height = this.myRef.current.firstChild.children[0].clientHeight;
         let sliderContainer = document.getElementsByClassName(className)[0];
-        // this.setState()
 
         for(var i = 0; i < sliderLength; i++) {
             children[i].style.width =  outerParentWidth + "px";
@@ -83,11 +93,17 @@ export default class Carousel extends Component{
             sliderContainer: sliderContainer,
             outerParentWidth: outerParentWidth,
             sliderLength:sliderLength,
-            option: option
+            options: option
         },() => {
             clearTimeout(timer);
             clearTimeout(timer2);
-            this.startRun();
+            if(option.autoplay) {
+                this.startRun();
+            }else{
+                this.setState({
+                    idx: 0
+                })
+            }
         })
     }
 
@@ -110,7 +126,7 @@ export default class Carousel extends Component{
             },() => {
                 that.state.sliderContainer.style.left = -that.state.outerParentWidth * that.state.idx + "px";
             });
-            timer = setTimeout(begin, that.state.option.timeGap)
+            timer = setTimeout(begin, that.state.options.timeGap)
         }
 
         begin();
@@ -124,7 +140,9 @@ export default class Carousel extends Component{
     handleMouseLeave = () => {
         timer2 = setTimeout(() => {
             clearTimeout(timer);
-            this.startRun();
+            if(this.state.options.autoplay) {
+                this.startRun();
+            }
             clearTimeout(timer2);
         },1500)
 
