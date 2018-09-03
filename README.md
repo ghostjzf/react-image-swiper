@@ -16,8 +16,9 @@ import Swiper from "react-image-swiper"
 .
 .
 const options = {
-    showPot: true,  //是否显示下方pot
-    timeGap: 3000   //时间间隔
+    showPot: true,  //是否显示下方pot 默认为true
+    timeGap: 3000   //时间间隔 默认3000
+    autoplay: true  //默认为true
 };
 .
 .
