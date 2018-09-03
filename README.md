@@ -1,5 +1,5 @@
 # react-image-swiper
-这是一个基于react的轮播组件
+这是一个基于react的轮播组件[github地址](https://github.com/ghostjzf/react-image-swiper/)
 
 代码示例
 ```
