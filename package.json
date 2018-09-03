@@ -1,6 +1,6 @@
 {
   "name": "react-image-swiper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/bundle.js",
   "files": [
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react": "^16.4.2"
   },
