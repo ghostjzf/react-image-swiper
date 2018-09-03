@@ -1,0 +1,6 @@
+{
+  "presets": ["env", "react"],
+  "plugins": [
+    "syntax-dynamic-import","transform-runtime","transform-decorators-legacy" ,"transform-class-properties"
+  ]
+}

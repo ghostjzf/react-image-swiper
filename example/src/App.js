@@ -28,7 +28,7 @@ class App extends Component {
               {
                   this.state.slideArr.map((item,index) => {
                       return <div className="slider-item" key={index}>
-                          <img className="slider-item-img" src={item.img} />
+                          <img className="slider-item-img" src={item.img} alt={index}/>
                       </div>
                   })
               }

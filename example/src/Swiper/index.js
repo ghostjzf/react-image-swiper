@@ -61,7 +61,7 @@ export default class Carousel extends Component{
                         <ul className={"carousel-nav"} >
                             {this.state.arr && this.state.arr.map((item,index) => {
                                 return <li
-                                    className={["pot", this.state.idx == index? "active" : ""].join(" ")}
+                                    className={["pot", this.state.idx === index? "active" : ""].join(" ")}
                                     key={index}
                                     onClick={this.changeNav.bind(this, index)}
                                     onMouseEnter={this.handleMouseEnter}></li>
